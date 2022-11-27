@@ -1,0 +1,18 @@
+<div class="form-group">
+    <label for="titlu" class="mb-1">Titlu</label>
+    <input required value="<%= item.titlu %>" type="text" name="titlu" id="titlu" class="form-control mb-4">
+</div>
+
+<div class="form-group">
+    <label for="detalii" class="mb-1">detalii (ex gramaj)</label>
+    <textarea required value="<%= item.detalii %>" type="text" name="detalii" id="detalii"
+        class="form-control mb-4"><%= item.detalii %></textarea>
+</div>
+<div class="form-group d-none">
+    <label for="bifat" class="mb-1">bifat</label>
+    <textarea required value="<%= item.bifat %>" type="text" name="bifat" id="bifat"
+        class="form-control mb-4">farabifa</textarea>
+</div>
+
+<a href="/" class="btn btn-danger">Anuleaza</a>
+<button type="submit" class="btn btn-dark">Salveaza</button>

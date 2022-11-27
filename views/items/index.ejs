@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <title>Lista de cumparaturi</title>
+    <style>
+        #link_titlu {
+            color: black;
+            text-decoration: none;
+            opacity: 0.6;
+            transition: all 0.7s ease-in-out;
+        }
+
+        .card-title {
+            font-family: "Roboto";
+        }
+
+        .card-body {
+            display: inline-flex;
+            justify-content: space-between;
+        }
+
+        .card-body:hover>#link_titlu {
+            opacity: 1;
+            transition: all 0.7s ease-in-out;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            transition: all 0.5s ease-in-out;
+        }
+
+        .card {
+            transition: all 0.5s ease-in-out;
+        }
+
+        .bifat {
+            text-decoration: line-through;
+        }
+
+        .butoane-control {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        form {
+            text-align: center;
+        }
+
+        form>button {
+            width: 135px;
+        }
+
+        .item-cu-detalii {
+            justify-content: space-between;
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container text-center px-5">
+        <h1 class="my-4">Lista cumpărături</h1>
+        <a href="items/new" class="btn btn-success">Adaugă ceva pe listă</a>
+
+        <% items.forEach(item=> { %>
+            <div class="card mt-4 text-start">
+                <div class="card-body">
+                    <div class="item-cu-detalii">
+                        <a id="link_titlu" href="items/<%= item.slug %>">
+                            <h4 class="card-title <%= item.bifat %>">
+                                <%= item.titlu %>
+                            </h4>
+                        </a>
+                        <div class="card-text mb-2 <%= item.bifat %>">
+                            <%= item.detalii %>
+                        </div>
+                    </div>
+                    <div class="butoane-control">
+                        <form action="/items/edit-bifa/<%= item.id %>" method="POST" class="d-inline">
+                            <button type="submit" class="btn btn-info text-white">
+                                <%= item.bifat=="bifat" ? "Undo taiere" : "Taie de pe lista" %>
+                            </button>
+                        </form>
+                        <form action="/items/<%= item.id %>?_method=DELETE" method="POST" class="d-inline">
+                            <button type="submit" class="btn btn-danger">Sterge definitiv</button>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+            <% }) %>
+    </div>
+</body>
+
+</html>
